@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/Content/css/font-face.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/Content/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="~/Content/css/theme.css" rel="stylesheet" media="all">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>კლინიკა</title>
+
+</head>
+<body class="animsition" style="background:#e2e0e0">
+    <header class="header-desktop" style="margin-right:20%;">
+        <div class="section__content section__content--p35">
+            <div class="container-fluid">
+                <div class="header-wrap">
+                    @Html.ActionLink("ექიმი", "Index", "Home")
+                    @Html.ActionLink("პაციენტი", "Patients", "Home")
+                    @Html.ActionLink("განყოფილება", "Department", "Home")
+                    @Html.ActionLink("ოთახი", "Room", "Home")
+                </div>
+            </div>
+        </div>
+    </header>
+    <br />
+    <br />
+    <br />
+    <div class="container body-content">
+        <h3 class="title-5 m-b-35" style="text-align:center;">ექიმი</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-right">
+                @using (Html.BeginForm("AddDoctor", "Home", FormMethod.Get))
+                {
+                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <i class="zmdi zmdi-plus"></i>დამატება
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                    <tr>
+                        <td> Id</td>
+                        <th>სახელი</th>
+                        <th>გვარი</th>
+                        <th>განყოფილება</th>
+                        <th>ოთახი</th>
+                        <th>ტელეფონი</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ClinicSakurso.Controllers.HomeController.Doctors.Count; i++)
+                    {
+                        <tr class="tr-shadow">
+                            <td>@ClinicSakurso.Controllers.HomeController.Doctors[i].Id</td>
+                            <td>
+                                <span class="block-email">@ClinicSakurso.Controllers.HomeController.Doctors[i].First_Name</span>
+                            </td>
+                            <td>
+                                <span class="block-email">@ClinicSakurso.Controllers.HomeController.Doctors[i].Last_Name</span>
+                            </td>
+                            <td>@ClinicSakurso.Controllers.HomeController.Doctors[i].Department</td>
+                            <td>@ClinicSakurso.Controllers.HomeController.Doctors[i].Room</td>
+                            <td class="desc">@ClinicSakurso.Controllers.HomeController.Doctors[i].Phone</td>
+                            <td>
+                                <div class="table-data-feature">
+                                    @using (Html.BeginForm("EditDoctor", "Home", FormMethod.Get, new { Name = ClinicSakurso.Controllers.HomeController.Doctors[i].Id }))
+                                    {
+                                        <button class="item" data-toggle="tooltip" data-placement="top" type="submit" name="UserId" value="@ClinicSakurso.Controllers.HomeController.Doctors[i].Id" title="შეცვლა">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </button>
+                                    }
+                                    @using (Html.BeginForm("DeleteDoctor", "Home", FormMethod.Post))
+                                    {
+                                        <button class="item" data-toggle="tooltip" data-placement="top" name="DeleteDoctor" value="@ClinicSakurso.Controllers.HomeController.Doctors[i].Id" title="წაშლა">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="spacer"></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+    <script src="~/Content/vendor/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="~/Content/vendor/slick/slick.min.js"></script>
+    <script src="~/Content/vendor/wow/wow.min.js"></script>
+    <script src="~/Content/vendor/animsition/animsition.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="~/Content/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="~/Content/vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="~/Content/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="~/Content/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/Content/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/Content/vendor/select2/select2.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
